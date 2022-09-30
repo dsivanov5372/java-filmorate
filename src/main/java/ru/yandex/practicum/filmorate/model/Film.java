@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 @lombok.Data
 @lombok.Builder
 public class Film {
-    @Min(0)
     int id;
     @NotNull
     @NotBlank

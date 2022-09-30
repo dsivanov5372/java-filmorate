@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @lombok.Data
 @lombok.Builder
 public class User {
-    @Min(0)
     int id;
     @Email
     String email;
