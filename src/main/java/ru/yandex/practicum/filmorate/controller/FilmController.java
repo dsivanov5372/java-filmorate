@@ -69,7 +69,7 @@ public class FilmController {
     public Film updateFilm(@Valid @RequestBody Film film) throws ValidationException {
         log.info("/PUT request, add/update film {}", film);
         if (!films.containsKey(film.getId())) {
-            String message = "Wrong fild id";
+            String message = "Film with this id doesn't exist";
             log.error(message);
             throw new ValidationException(message);
         }
