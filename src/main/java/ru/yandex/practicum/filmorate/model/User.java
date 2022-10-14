@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @lombok.Data
 @lombok.Builder
 public class User {
-    int id;
+    long id;
     @Email
     String email;
     String name;
@@ -16,4 +17,13 @@ public class User {
     @NotBlank
     String login;
     LocalDate birthday;
+    Set<Long> friends;
+
+    public void addFriend(Long id) {
+        friends.add(id);
+    }
+
+    public void deleteFriend(Long id) {
+        friends.remove(id);
+    }
 }
