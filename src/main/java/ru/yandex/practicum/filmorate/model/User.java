@@ -5,9 +5,11 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.Builder;
 
-@lombok.Data
-@lombok.Builder
+@Data
+@Builder
 public class User {
     long id;
     @Email

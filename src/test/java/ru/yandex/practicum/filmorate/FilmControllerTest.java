@@ -2,6 +2,8 @@ package ru.yandex.practicum.filmorate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,11 +46,11 @@ public class FilmControllerTest {
         controller.addFilm(film);
 
         ArrayList<Film> arr = new ArrayList<>(controller.getFilms());
-        assertEquals(arr.get(0).getName(), "Halt and cath fire");
-        assertEquals(arr.get(0).getDescription(), "serial");
-        assertEquals(arr.get(0).getDuration(), 100);
-        assertEquals(arr.get(0).getReleaseDate(), LocalDate.of(2014, 6, 1));
-        assertEquals(arr.get(0).getId(), 1);
+        assertEquals("Halt and cath fire", arr.get(0).getName());
+        assertEquals("serial", arr.get(0).getDescription());
+        assertEquals(100, arr.get(0).getDuration());
+        assertEquals(LocalDate.of(2014, 6, 1), arr.get(0).getReleaseDate());
+        assertEquals(1, arr.get(0).getId());
     }
 
     private static Stream<Arguments> films() {
@@ -91,9 +93,7 @@ public class FilmControllerTest {
     @ParameterizedTest
     @MethodSource("films")
     public void throwsExceptionIfInvalidField(Film film, String message) {
-        ValidationException exception = assertThrows(ValidationException.class, () -> {
-            controller.addFilm(film);
-        });  
+        ValidationException exception = assertThrows(ValidationException.class, () -> controller.addFilm(film));  
         assertEquals(exception.getMessage(), message);
         assertEquals(controller.getFilms().size(), 0);   
     }
@@ -134,7 +134,7 @@ public class FilmControllerTest {
         storage.addUser(user);
         controller.addLike(String.valueOf(film.getId()), String.valueOf(user.getId()));
         
-        assertEquals(film.getUsersLikes().contains(user.getId()), true);
+        assertTrue(film.getUsersLikes().contains(user.getId()));
         assertEquals(film.getUsersLikes().size(), 1);
         ArrayList<Film> films = new ArrayList<>(controller.getMostPopularFilms(String.valueOf(1)));
         assertEquals(films.get(0), film);
@@ -204,13 +204,13 @@ public class FilmControllerTest {
     public void checkOrderOfFilmsWhenGetMostPopular(ArrayList<Film> films, int size) 
                 throws ValidationException {
                     
-        films.stream().forEach((film) -> {
+        for (Film film : films) {
             try {
                 controller.addFilm(film);
             } catch (ValidationException e) {
                 e.printStackTrace();
             }
-        });
+        }
 
         ArrayList<Film> popularFilms = new ArrayList<>(controller.getMostPopularFilms(String.valueOf(size)));
         assertEquals(popularFilms.size(), size);
