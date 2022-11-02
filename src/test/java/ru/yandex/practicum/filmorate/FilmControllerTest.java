@@ -54,9 +54,9 @@ public class FilmControllerTest {
     }
 
     private static Stream<Arguments> films() {
-        String description = "";
+        StringBuilder description = new StringBuilder();
         for (int i = 0; i < 210; ++i) {
-            description += "/";
+            description.append('/');
         }
 
         return Stream.of(
@@ -69,7 +69,7 @@ public class FilmControllerTest {
                         "Name of the film can't be empty"),
           Arguments.of(Film.builder()
                         .name("Halt and catch fire")
-                        .description(description)
+                        .description(description.toString())
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
                         .build(),
