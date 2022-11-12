@@ -6,4 +6,4 @@ Template repository for Filmorate project.
 
 Рекомендации другого студента находятся в папке pics.
 
-![pic1](./pics/table.png)
+![pic1](./pics/table_new.png)
