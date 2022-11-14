@@ -4,10 +4,8 @@ import java.util.Collection;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 
-public interface UserStorage {
+public interface UserDao {
     Collection<User> getUsers();
-
-    Collection<User> getUserFriends(long userId) throws RuntimeException;
 
     User addUser(User user) throws ValidationException;
 

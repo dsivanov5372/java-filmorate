@@ -4,7 +4,7 @@ import java.util.Collection;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
-public interface FilmStorage {
+public interface FilmDao {
     Collection<Film> getFilms();
     
     Film addFilm(Film film) throws ValidationException;

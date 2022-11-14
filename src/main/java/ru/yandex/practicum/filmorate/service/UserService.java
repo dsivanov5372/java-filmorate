@@ -1,20 +1,22 @@
 package ru.yandex.practicum.filmorate.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.UserStorage;
+import ru.yandex.practicum.filmorate.storage.FriendsDao;
+import ru.yandex.practicum.filmorate.storage.UserDao;
 
 @Service
 public class UserService {
-    private final UserStorage storage;
+    private final UserDao storage;
+    private final FriendsDao friendsStorage;
 
     @Autowired
-    public UserService(UserStorage storage) {
+    public UserService(UserDao storage, FriendsDao friendsStorage) {
         this.storage = storage;
+        this.friendsStorage = friendsStorage;
     }
     
     public Collection<User> getUsers() {
@@ -25,8 +27,8 @@ public class UserService {
         return storage.addUser(user);
     }
 
-    public User updateUser(User user) throws RuntimeException, 
-                                             ValidationException {
+    public User updateUser(User user) throws RuntimeException, ValidationException {
+        storage.getUserById(user.getId());
         return storage.updateUser(user);
     }
 
@@ -35,40 +37,24 @@ public class UserService {
     }
 
     public Collection<User> getUserFriends(long userId) throws RuntimeException {
-        return storage.getUserFriends(userId);
+        return friendsStorage.getUserFriends(userId);
     }
 
     public void addFriend(long userId, long friendId) throws RuntimeException {
-        User user = storage.getUserById(userId);
-        User friend = storage.getUserById(friendId);
+        storage.getUserById(userId);
+        storage.getUserById(friendId);
 
-        friend.addFriend(userId);
-        user.addFriend(friendId);
+        friendsStorage.addFriend(userId, friendId);
     }
 
-    public void deleteFriend(long userId, long friendId) throws ValidationException {
-        User user = storage.getUserById(userId);
-        User friend = storage.getUserById(friendId);
+    public void deleteFriend(long userId, long friendId) throws RuntimeException {
+        storage.getUserById(userId);
+        storage.getUserById(friendId);
 
-        friend.deleteFriend(userId);
-        user.deleteFriend(friendId);
+        friendsStorage.deleteFriend(userId, friendId);
     }
 
     public Collection<User> findCommonFriends(long userId, long friendId) throws RuntimeException {
-        User user = storage.getUserById(userId);
-        User friend = storage.getUserById(friendId);
-        ArrayList<User> result = new ArrayList<>();
-
-        ArrayList<User> userFriends = new ArrayList<>();
-        user.getFriends().forEach(id -> userFriends.add(storage.getUserById(id)));
-
-        friend.getFriends().forEach(id -> {
-            User commonFriend = storage.getUserById(id);
-            if (userFriends.contains(commonFriend)) {
-                result.add(commonFriend);
-            }
-        });
-
-        return result;
+        return friendsStorage.findCommonFriends(userId, friendId);
     }
 }
