@@ -26,9 +26,9 @@ public class FriendsDaoTest {
     @Test
     public void returnEmptyListOfFriendsIfLonely() throws ValidationException {
         User user = User.builder()
-                        .email("mail@yandex.ru")
+                        .email("mail101@yandex.ru")
                         .name("Аркадий Волож")
-                        .login("ПлачуМногаДеняк")
+                        .login("login101")
                         .birthday(LocalDate.of(1942, 12, 4))
                         .build();
 
@@ -37,9 +37,9 @@ public class FriendsDaoTest {
         assertTrue(friendsDao.getUserFriends(user.getId()).isEmpty());
 
         User newUser = User.builder()
-                            .email("notemail@yandex.ru")
+                            .email("mail102@yandex.ru")
                             .name("Илья Сегалович")
-                            .login("НеПлачуДеняк")
+                            .login("login102")
                             .birthday(LocalDate.of(1942, 12, 4))
                             .build();
 
@@ -53,18 +53,18 @@ public class FriendsDaoTest {
     @Test
     public void returnEmptyListOfFriendsIfHasFriends() throws ValidationException {
         User user1 = User.builder()
-                        .email("mail1@yandex.ru")
+                        .email("mail103@yandex.ru")
                         .name("Аркадий Волож")
-                        .login("ПлачуМногаДенякЧестно")
+                        .login("login103")
                         .birthday(LocalDate.of(1942, 12, 4))
                         .build();
 
         user1 = userDao.addUser(user1);
 
         User user2 = User.builder()
-                        .email("mail2@yandex.ru")
+                        .email("mail104@yandex.ru")
                         .name("Аркадий Волож")
-                        .login("ПлачуМногаДенякЧестноЧестно")
+                        .login("login104")
                         .birthday(LocalDate.of(1942, 12, 4))
                         .build();
 
@@ -77,18 +77,18 @@ public class FriendsDaoTest {
     @Test
     public void returnEmptyListIfNoCommonFriends() throws ValidationException {
         User user1 = User.builder()
-                .email("mail5@yandex.ru")
+                .email("mail105@yandex.ru")
                 .name("Аркадий Волож")
-                .login("КаменьНеДам")
+                .login("login105")
                 .birthday(LocalDate.of(1942, 12, 4))
                 .build();
 
         user1 = userDao.addUser(user1);
 
         User user2 = User.builder()
-                .email("mail6@yandex.ru")
+                .email("mail106@yandex.ru")
                 .name("Илья Сегалович")
-                .login("ПлотинуНадоПоднять")
+                .login("login106")
                 .birthday(LocalDate.of(1942, 12, 4))
                 .build();
 
@@ -100,27 +100,27 @@ public class FriendsDaoTest {
     @Test
     public void returnListOfCommonFriendsIfTheyHaveThem() throws ValidationException {
         User user1 = User.builder()
-                    .email("mail1@gmail.com")
+                    .email("mail107@yandex.ru")
                     .name("Сергей Брин")
-                    .login("ОченьМногоДеняк")
+                    .login("login107")
                     .birthday(LocalDate.of(1942, 12, 4))
                     .build();
 
         user1 = userDao.addUser(user1);
 
         User user2 = User.builder()
-                    .email("mail2@gmail.com")
+                    .email("mail108@yandex.ru")
                     .name("Ларри Пейдж")
-                    .login("НуОченьМногоДеняк")
+                    .login("login108")
                     .birthday(LocalDate.of(1942, 12, 4))
                     .build();
 
         user2 = userDao.addUser(user2);
 
         User user3 = User.builder()
-                    .email("mail@facebook.com")
+                    .email("mail109@yandex.ru")
                     .name("Марк Цукерберг")
-                    .login("НуCлишкомОченьМногоДеняк")
+                    .login("login109")
                     .birthday(LocalDate.of(1942, 12, 4))
                     .build();
 

@@ -72,7 +72,7 @@ public class GenreDaoTest {
         genres.add(genre2);
 
         Film film = Film.builder()
-                        .name("The boys")
+                        .name("The boys 1001")
                         .description("serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -91,7 +91,7 @@ public class GenreDaoTest {
     @Test
     public void returnListOfGenresOfFilmEmpty() throws ValidationException {
         Film film = Film.builder()
-                        .name("The boys 2")
+                        .name("The boys 1002")
                         .description("not serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -119,7 +119,7 @@ public class GenreDaoTest {
         genres.add(genre2);
 
         Film film = Film.builder()
-                        .name("The boys 3")
+                        .name("The boys 1005")
                         .description("not serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -142,7 +142,7 @@ public class GenreDaoTest {
         genres.add(genre2);
 
         Film film = Film.builder()
-                .name("The boys 4")
+                .name("The boys 1006")
                 .description("not serial")
                 .duration(100)
                 .releaseDate(LocalDate.of(2014, 6, 1))

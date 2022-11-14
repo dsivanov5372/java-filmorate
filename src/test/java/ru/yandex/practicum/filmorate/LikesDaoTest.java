@@ -32,7 +32,7 @@ public class LikesDaoTest {
     @Test
     public void addLikeToFilms() throws ValidationException {
         Film film1 = Film.builder()
-                .name("The boys 1")
+                .name("The boys 10001")
                 .description("serial")
                 .duration(100)
                 .releaseDate(LocalDate.of(2014, 6, 1))
@@ -40,7 +40,7 @@ public class LikesDaoTest {
                 .build();
 
         Film film2 = Film.builder()
-                .name("The boys 2")
+                .name("The boys 10002")
                 .description("serial")
                 .duration(100)
                 .releaseDate(LocalDate.of(2014, 6, 1))
@@ -48,16 +48,16 @@ public class LikesDaoTest {
                 .build();
 
         User user1 = User.builder()
-                        .email("mail1@yandex.ru")
+                        .email("mail1001@yandex.ru")
                         .name("Аркадий Волож")
-                        .login("ПлачуМалаДеняк")
+                        .login("login1001")
                         .birthday(LocalDate.of(1942, 12, 4))
                         .build();
 
         User user2 = User.builder()
-                        .email("mail2@yandex.ru")
+                        .email("mail1002@yandex.ru")
                         .name("Илья Сегалович")
-                        .login("ПлачуМногаДеняк")
+                        .login("login1002")
                         .birthday(LocalDate.of(1942, 12, 4))
                         .build();
 
@@ -73,7 +73,7 @@ public class LikesDaoTest {
         assertEquals(film1, films.get(0));
         assertEquals(film2, films.get(1));
 
-        likesDao.removeLike(film1.getId(), user1.getId());
+        likesDao.addLike(film2.getId(), user2.getId());
         likesDao.removeLike(film1.getId(), user2.getId());
 
         ArrayList<Film> films1 = (ArrayList<Film>) likesDao.getMostPopularFilms(2);

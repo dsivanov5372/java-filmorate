@@ -37,7 +37,7 @@ public class FilmDaoTest {
         genres.add(Genre.builder().id(4).build());
 
         Film film = Film.builder()
-                        .name("The boys")
+                        .name("The boys 100")
                         .description("serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -99,7 +99,7 @@ public class FilmDaoTest {
     @Test
     public void returnListOfFilmsIfNotEmpty() throws ValidationException {
         Film film1 = Film.builder()
-                        .name("Halt and catch fire")
+                        .name("Halt and catch fire 100")
                         .description("serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -107,7 +107,7 @@ public class FilmDaoTest {
                         .build();
 
         Film film2 = Film.builder()
-                        .name("Halt and catch fire 2")
+                        .name("Halt and catch fire 101")
                         .description("serial")
                         .duration(100)
                         .releaseDate(LocalDate.of(2014, 6, 1))
@@ -125,7 +125,7 @@ public class FilmDaoTest {
     @Test
     public void updateFilmIfValid() throws ValidationException {
         Film film = Film.builder()
-                .name("Halt and catch fire")
+                .name("Halt and catch fire 103")
                 .description("serial")
                 .duration(100)
                 .releaseDate(LocalDate.of(2014, 6, 1))
@@ -154,7 +154,7 @@ public class FilmDaoTest {
     @MethodSource("films")
     public void throwExceptionWhenUpdateAndFieldsNotValid(Film film, String message) throws ValidationException {
         Film film1 = Film.builder()
-                .name("Halt and catch fire")
+                .name("Halt and catch fire 104")
                 .description("serial")
                 .duration(100)
                 .releaseDate(LocalDate.of(2014, 6, 1))
