@@ -38,7 +38,7 @@ public class GenreDbStorage implements GenreDao {
     }
 
     @Override
-    public Genre getGenre(int id) throws RuntimeException {
+    public Genre getGenre(int id) throws GenreNotFoundException {
         String sql = "SELECT genre_id, name FROM genres WHERE genre_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 

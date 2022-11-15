@@ -111,7 +111,7 @@ public class FilmDbStorage implements FilmDao {
     }
 
     @Override
-    public Film updateFilm(Film film) throws ValidationException, RuntimeException {
+    public Film updateFilm(Film film) throws ValidationException {
         validate(film);
 
         String sql = "UPDATE films SET name = ?, description = ?, release_date = ?, duration = ?," +
@@ -128,7 +128,7 @@ public class FilmDbStorage implements FilmDao {
     }
 
     @Override
-    public Film getFilmById(long id) throws RuntimeException {
+    public Film getFilmById(long id) throws FilmNotFoundException {
         String sql = "SELECT * FROM films WHERE film_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 

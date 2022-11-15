@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import ru.yandex.practicum.filmorate.exception.MpaRatingNotFoundException;
 import ru.yandex.practicum.filmorate.model.MpaRating;
 import ru.yandex.practicum.filmorate.service.MpaService;
-
 import java.util.Collection;
 
 @RestController
@@ -24,7 +24,7 @@ public class MpaController {
     }
 
     @GetMapping("/mpa/{id}")
-    public MpaRating getMpaRating(@PathVariable("id") String mpaId) throws RuntimeException {
+    public MpaRating getMpaRating(@PathVariable("id") String mpaId) throws MpaRatingNotFoundException {
         return service.getMpaRating(Integer.parseInt(mpaId));
     }
 }

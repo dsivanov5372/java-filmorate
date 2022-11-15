@@ -60,7 +60,7 @@ public class FriendsDbStorage implements FriendsDao {
     }
 
     @Override
-    public Collection<User> getUserFriends(long userId) throws RuntimeException {
+    public Collection<User> getUserFriends(long userId) {
         String sql = "SELECT * FROM users WHERE user_id IN (SELECT friend_id FROM friends WHERE user_id = ?)";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
         Collection<User> toReturn = new ArrayList<>();

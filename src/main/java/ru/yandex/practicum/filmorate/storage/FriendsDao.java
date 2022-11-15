@@ -9,7 +9,7 @@ public interface FriendsDao {
 
     void deleteFriend(long userId, long friendId);
 
-    Collection<User> getUserFriends(long userId) throws RuntimeException;
+    Collection<User> getUserFriends(long userId);
 
     Collection<User> findCommonFriends(long userId, long friendId);
 }

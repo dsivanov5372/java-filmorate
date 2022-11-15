@@ -2,6 +2,8 @@ package ru.yandex.practicum.filmorate.controller;
 
 import java.util.Collection;
 import javax.validation.Valid;
+
+import ru.yandex.practicum.filmorate.exception.UserNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,21 +38,20 @@ public class UserController {
 
     @PutMapping("/users")
     public User updateUser(@Valid @RequestBody User user) 
-                throws RuntimeException, ValidationException {
+                throws UserNotFoundException, ValidationException {
         return service.updateUser(user);
     }
 
     @PutMapping("/users/{id}/friends/{friendId}")
     public void addFriend(@PathVariable("id") String userId,
                           @PathVariable("friendId") String friendId)
-                          throws RuntimeException {
+                          throws UserNotFoundException {
         service.addFriend(Long.parseLong(userId), Long.parseLong(friendId));
     }
 
     @DeleteMapping("/users/{id}/friends/{friendId}")
     public void deleteFriend(@PathVariable("id") String userId,
-                             @PathVariable("friendId") String friendId)
-                             throws ValidationException {
+                             @PathVariable("friendId") String friendId) {
         service.deleteFriend(Long.parseLong(userId), Long.parseLong(friendId));
     }
 
@@ -62,12 +63,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUser(@PathVariable("id") String userId) throws RuntimeException {
+    public User getUser(@PathVariable("id") String userId) throws UserNotFoundException {
         return service.getUserById(Long.parseLong(userId));
     }
 
     @GetMapping("/users/{id}/friends")
-    public Collection<User> getUserFrinds(@PathVariable("id") String userId) throws RuntimeException {
+    public Collection<User> getUserFrinds(@PathVariable("id") String userId) throws UserNotFoundException {
         return service.getUserFriends(Long.parseLong(userId));
     }
 }

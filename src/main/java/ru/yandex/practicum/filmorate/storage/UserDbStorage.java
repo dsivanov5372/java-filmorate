@@ -96,7 +96,7 @@ public class UserDbStorage implements UserDao {
     }
 
     @Override
-    public User updateUser(User user) throws RuntimeException, ValidationException {
+    public User updateUser(User user) throws ValidationException {
         validate(user);
 
         String sql = "UPDATE users SET email = ?, login = ?, name = ?, birthday = ? WHERE user_id = ?";
@@ -107,7 +107,7 @@ public class UserDbStorage implements UserDao {
     }
 
     @Override
-    public User getUserById(Long id) throws RuntimeException {
+    public User getUserById(Long id) throws UserNotFoundException {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 

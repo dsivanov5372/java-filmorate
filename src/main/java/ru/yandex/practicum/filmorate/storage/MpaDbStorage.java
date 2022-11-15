@@ -37,7 +37,7 @@ public class MpaDbStorage implements MpaDao {
     }
 
     @Override
-    public MpaRating getMpaRating(int id) throws RuntimeException {
+    public MpaRating getMpaRating(int id) throws MpaRatingNotFoundException {
         String sql = "SELECT mpa_rating_id, name FROM mpa_ratings WHERE mpa_rating_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 

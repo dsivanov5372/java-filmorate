@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.exception.MpaRatingNotFoundException;
 import ru.yandex.practicum.filmorate.model.MpaRating;
 import ru.yandex.practicum.filmorate.storage.MpaDao;
 import java.util.Collection;
@@ -19,7 +20,7 @@ public class MpaService {
         return mpaDao.getMpaRatings();
     }
 
-    public MpaRating getMpaRating(int id) throws RuntimeException {
+    public MpaRating getMpaRating(int id) throws MpaRatingNotFoundException {
         return mpaDao.getMpaRating(id);
     }
 }
