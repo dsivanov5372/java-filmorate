@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.yandex.practicum.filmorate.exception.FilmNotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
@@ -36,21 +37,21 @@ public class FilmController {
 
     @PutMapping("/films") 
     public Film updateFilm(@Valid @RequestBody Film film) 
-                throws ValidationException, RuntimeException {
+                throws ValidationException, FilmNotFoundException {
         return service.updateFilm(film);
     }
 
     @PutMapping("/films/{id}/like/{userId}")
     public void addLike(@PathVariable("id") String filmId, 
                         @PathVariable("userId") String userId) 
-                        throws RuntimeException {
+                        throws FilmNotFoundException {
         service.addLike(Long.parseLong(filmId), Long.parseLong(userId));
     }
 
     @DeleteMapping("/films/{id}/like/{userId}")
     public void removeLike(@PathVariable("id") String filmId, 
                            @PathVariable("userId") String userId) 
-                           throws RuntimeException {
+                           throws FilmNotFoundException {
         service.removeLike(Long.parseLong(filmId), Long.parseLong(userId));
     }
 
@@ -60,7 +61,7 @@ public class FilmController {
     }
 
     @GetMapping("/films/{id}")
-    public Film getFilm(@PathVariable("id") String filmId) throws RuntimeException {
+    public Film getFilm(@PathVariable("id") String filmId) throws FilmNotFoundException {
         return service.getFilm(Long.parseLong(filmId));
     }
 }
